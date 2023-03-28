@@ -11,7 +11,7 @@ export default CandyContext;
 
 const CandyContextProvider = (props) => {
     const [list, setList] = useState([]);
-    const api_url = "https://crudcrud.com/api/c3c6e8f1910647a19eaa1d2e4ce43c77";
+    const api_url = "https://crudcrud.com/api/de409ec4562d423bb01dbe1f1145ae25";
 
     const addCandy_handler = (details) => {
         setList((prv) => {

@@ -59,7 +59,7 @@ export default function CandyListItem(props) {
                 if (!res.ok) {
                     throw new Error("unable to update item in cart");
                 }
-                // cartCtx.addInCart()
+                cartCtx.updateInCart(cartId, candyQuantity);
             }
             catch (err) {
                 console.log(err);

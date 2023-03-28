@@ -4,7 +4,8 @@ import CandyContext from "./candy-context";
 const CartContext = React.createContext({
     itemList: [],
     addInCart: () => { },
-    removeFromCart: () => { }
+    removeFromCart: () => { },
+    updateInCart: () => { }
 })
 
 export default CartContext;
@@ -13,6 +14,19 @@ const cartReducer = (state, action) => {
     if (action.type === "add") {
         state.list = [...state.list, action.item];
         state.totalAmount = state.totalAmount + (+action.item.quantity * +action.item.price)
+        return {
+            list: state.list,
+            totalAmount: state.totalAmount
+        }
+    }
+    else if (action.type === "update") {
+        const itemIndex = state.list.findIndex((item) => {
+            return item._id.toString() === action.id.toString();
+        })
+
+        state.list[itemIndex].quantity += parseInt(action.quantity);
+        state.totalAmount += parseInt(state.list[itemIndex].price) * parseInt(action.quantity);
+
         return {
             list: state.list,
             totalAmount: state.totalAmount
@@ -58,6 +72,10 @@ const CartContextProvider = (props) => {
         dispatchCart({ type: "add", item: obj })
     }
 
+    const updateInCart_handler = (id, quantity) => {
+        dispatchCart({ type: "update", id: id, quantity: quantity })
+    }
+
     const removeFromCart_handler = (id) => {
         dispatchCart({ type: "remove", id: id })
     }
@@ -87,7 +105,8 @@ const CartContextProvider = (props) => {
             itemList: items.list,
             totalAmount: items.totalAmount,
             addInCart: addInCart_handler,
-            removeFromCart: removeFromCart_handler
+            removeFromCart: removeFromCart_handler,
+            updateInCart: updateInCart_handler
         }}>
             {props.children}
         </CartContext.Provider>
