@@ -68,7 +68,6 @@ const CartContextProvider = (props) => {
     })
 
     const addInCart_handler = (obj) => {
-        console.log(111);
         dispatchCart({ type: "add", item: obj })
     }
 

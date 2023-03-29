@@ -31,19 +31,19 @@ const CartBox = (props) => {
                 <ul>
                     {cartCtx.itemList.map((item) => {
                         return <li key={item._id}>
+                            <p hidden>{item.shopId}</p>
                             <p>
-                                <span>{item.name}</span>
-                                <span>{item.descr}</span>
-                                <span>{item.price}</span>
+                                <span>{item.name}</span> - <span>{item.descr}</span> - <span>{item.price}</span>
                             </p>
                             <p>
                                 quantity = x <span>{item.quantity}</span>
                             </p>
                             <button onClick={removeFromCart}>remove</button>
-                            <p>{item._id}</p>
+                            <p hidden>{item._id}</p>
                         </li>
                     })}
                 </ul>
+                <h2>Total Amount = Rs. {cartCtx.totalAmount.toFixed(2)}</h2>
             </div>
         </React.Fragment>
     )
